@@ -72,7 +72,7 @@ const App = () => {
             placeholder:"House Number",
             errorMessage: "House number is required",
             label:"House Number",
-            required: true,
+            required: true
         },
         {
             id:7,
@@ -96,9 +96,11 @@ const App = () => {
         
     }
 
-    const handleChange = (e) => {
+    const onChangeHandler = (e) => {
         const {name, value, validity} = e.target
+        // console.log(name, value)
         setValues({...values, [name]: value})
+        console.log(values)
         if(name === 'postcode'){
             if(validity.valid){
                 // console.log(validity.valid)
@@ -107,7 +109,8 @@ const App = () => {
                 // console.log(values.houseNumber.length)
                 if(values.houseNumber.length > 0){
                     //call API
-                    console.log(values.postcode)
+                    // console.log(values.postcode)
+                    console.log(values)
                     setTimeout(() => {
                         callApi()
                     }, 1000);
@@ -115,12 +118,12 @@ const App = () => {
             }
             else{
                 setIsPostcodeValid(false)
-                console.log(validity.valid)
-                console.log(isPostcodeValid)
+                // console.log(validity.valid)
+                // console.log(isPostcodeValid)
             }
         }
         if(name === 'houseNumber' && isPostcodeValid){
-            console.log(isPostcodeValid)
+            // console.log(isPostcodeValid)
             // call Api
             setTimeout(() => {
                 callApi()
@@ -151,7 +154,7 @@ const App = () => {
             <form onSubmit={handelSubmit}>
                 <h1>Incentro Form</h1>
                 {inputs.map((input) => (
-                    <FormInput key={input.id} {...input} value={values[input.name]} onChange={handleChange}/>
+                    <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChangeHandler}/>
                 ))}
                 <button>Submit</button>
             </form>
